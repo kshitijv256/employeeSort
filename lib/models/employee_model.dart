@@ -1,15 +1,23 @@
-class Employee {
-  int id;
-  String name;
-  String salary;
+import 'package:mongo_dart/mongo_dart.dart';
 
-  Employee({required this.id, required this.name, required this.salary});
+class Employee {
+  ObjectId? id;
+  String name;
+  int experience;
+  bool active;
+
+  Employee(
+      {this.id,
+      required this.name,
+      required this.experience,
+      required this.active});
 
   factory Employee.fromJson(Map<String, dynamic> json) {
     return Employee(
-      id: json['id'],
-      name: json['employee_name'],
-      salary: json['employee_salary'],
+      id: json['_id'],
+      name: json['name'],
+      experience: json['experience'],
+      active: json['active'],
     );
   }
 }

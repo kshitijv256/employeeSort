@@ -1,9 +1,21 @@
+import 'package:zyluapp/database.dart';
+import 'package:zyluapp/models/employee_model.dart';
+
 class EmployeeController {
-  void addEmployee() {
-    print('Employee added');
+  var collection = MongoDatabase.db?.collection('employee');
+  void addEmployee(String name, int yoe, bool active) {
+    collection!.insertOne({
+      'name': name,
+      'experience': yoe,
+      'active': active,
+    });
   }
 
-  void fetchAllEmployee() {
-    print('All Employee fetched');
+  Future<List<Employee>> fetchAllEmployee() async {
+    var myList = collection!.find().toList().then((value) {
+      var empList = value.map((e) => Employee.fromJson(e)).toList();
+      return empList;
+    });
+    return myList;
   }
 }

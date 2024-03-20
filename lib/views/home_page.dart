@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:zyluapp/views/add_employee.dart';
+import 'package:zyluapp/views/employee_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,15 +12,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   List<Widget> pages = [
-    const Text('Page 1'),
-    const Text('Page 2'),
+    const AddEmployee(),
+    const EmployeeList(),
   ];
+  List<String> title = ['Add Employee', 'Employee List'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Home Page'),
+        title: Text(title.elementAt(_selectedIndex)),
       ),
       body: Center(child: pages.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
